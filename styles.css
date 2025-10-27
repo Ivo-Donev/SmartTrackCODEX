@@ -46,10 +46,12 @@ input[type="text"]:focus, select:focus { border-color: rgba(255, 122, 24, .65); 
 
 .flame-btn { position: relative; display: grid; place-items: center; width: clamp(120px, 28vw, 180px); aspect-ratio: 1 / 1; border-radius: 50%; border: 1px solid rgba(255,255,255,.08); background: radial-gradient(80% 70% at 50% 30%, #2a1d12 0%, #14161f 60%); box-shadow: 0 12px 40px rgba(0,0,0,.45), inset 0 -30px 60px rgba(0,0,0,.35); cursor: pointer; transition: transform var(--transition), box-shadow var(--transition); user-select: none; -webkit-tap-highlight-color: transparent; }
 .flame-btn:hover { transform: translateY(-2px); box-shadow: 0 16px 48px rgba(0,0,0,.55); }
-.flame { font-size: clamp(56px, 10vw, 86px); filter: drop-shadow(0 4px 20px rgba(255, 122, 24, .35)); }
+
+.flame, .icon { font-size: clamp(56px, 10vw, 86px); filter: drop-shadow(0 4px 20px rgba(255, 122, 24, .35)); }
 .count-badge { position: absolute; inset: 0; display: grid; place-items: center; font-weight: 800; font-size: clamp(26px, 6vw, 36px); color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,.5); pointer-events: none; mix-blend-mode: normal; opacity: 0; transition: opacity var(--transition); }
 .count-badge.show { opacity: 1; }
 
+/* Modal */
 .overlay { position: fixed; inset: 0; background: rgba(0,0,0,.55); opacity: 0; pointer-events: none; transition: opacity var(--transition); }
 .overlay.open { opacity: 1; pointer-events: auto; }
 
@@ -65,3 +67,8 @@ input[type="text"]:focus, select:focus { border-color: rgba(255, 122, 24, .65); 
 .safe-area { padding-bottom: env(safe-area-inset-bottom); }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
+
+/* Streak badge (top-left) */
+.streak { position: fixed; top: 12px; left: 12px; z-index: 50; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px; background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.08); box-shadow: 0 6px 18px rgba(0,0,0,.25); backdrop-filter: blur(6px); }
+.streak-emoji { font-size: 18px; filter: drop-shadow(0 2px 8px rgba(255,122,24,.35)); }
+.streak-count { font-weight: 800; font-size: 16px; color: #fff; }

@@ -7,6 +7,12 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <!-- Streak badge (top-left) -->
+  <div class="streak" aria-live="polite" title="Daily streak">
+    <span class="streak-emoji" aria-hidden="true">🔥</span>
+    <span id="streakCount" class="streak-count">0</span>
+  </div>
+
   <!-- Screen 1: Login -->
   <section id="loginScreen" class="screen" aria-labelledby="loginTitle">
     <div class="card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
@@ -31,12 +37,12 @@
       <div class="hello" id="hello"></div>
 
       <button id="flameBtn" class="flame-btn" aria-haspopup="dialog" aria-controls="logModal">
-        <span class="flame" aria-hidden="true">🔥</span>
+        <span class="icon" aria-hidden="true">🧠</span>
         <span id="countBadge" class="count-badge" aria-hidden="true"></span>
         <span class="sr-only">Log an activity</span>
       </button>
 
-      <p class="muted">Tap the flame to log what you did today and for how long.</p>
+      <p class="muted">Tap the brain to log what you did today and for how long.</p>
     </div>
   </section>
 

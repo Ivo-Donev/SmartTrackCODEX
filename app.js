@@ -3,7 +3,7 @@
 // --- State & persistence ---
 const state = {
   username: null,
-  logs: [] // {text, minutes, ts}
+  logs: [] // { text, minutes, ts }
 };
 
 const LS_KEY = 'habitfire_state_v1';
@@ -41,6 +41,8 @@ const closeModalBtn = document.getElementById('closeModal');
 const activityInput = document.getElementById('activityInput');
 const durationSelect= document.getElementById('durationSelect');
 const logBtn        = document.getElementById('logBtn');
+
+const streakCountEl = document.getElementById('streakCount');
 
 // --- Helpers ---
 function setScreens(showMain) {
@@ -83,6 +85,38 @@ function updateBadge() {
   }
 }
 
+// Convert timestamp to local YYYY-MM-DD key
+function toDateKey(ts) {
+  const d = new Date(ts);
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+// Count consecutive days ending today that have at least one log
+function calcStreak() {
+  if (state.logs.length === 0) return 0;
+  const datesWithLogs = new Set(state.logs.map(l => toDateKey(l.ts)));
+  let streak = 0;
+  const cur = new Date();
+  while (true) {
+    const key = toDateKey(cur);
+    if (datesWithLogs.has(key)) {
+      streak += 1;
+    } else {
+      break;
+    }
+    cur.setDate(cur.getDate() - 1);
+  }
+  return streak;
+}
+
+function updateStreak() {
+  const value = calcStreak();
+  streakCountEl.textContent = String(value);
+}
+
 function openModal() {
   overlay.classList.add('open');
   modal.classList.add('open');
@@ -109,6 +143,7 @@ function login(username) {
   hello.textContent = `Hi, ${state.username}!`;
   setScreens(true);
   updateBadge();
+  updateStreak();
 }
 
 function handleLog() {
@@ -118,6 +153,7 @@ function handleLog() {
   state.logs.push({ text, minutes: mins, ts: Date.now() });
   saveState();
   updateBadge();
+  updateStreak();
   closeModal();
 }
 
@@ -147,9 +183,7 @@ overlay.addEventListener('click', (e) => {
 });
 
 activityInput.addEventListener('input', checkForm);
-
 durationSelect.addEventListener('change', checkForm);
-
 logBtn.addEventListener('click', handleLog);
 
 // --- Init ---
@@ -160,6 +194,7 @@ if (state.username) {
   hello.textContent = `Hi, ${state.username}!`;
   setScreens(true);
   updateBadge();
+  updateStreak();
 } else {
   setScreens(false);
   setTimeout(() => usernameInput.focus(), 60);
