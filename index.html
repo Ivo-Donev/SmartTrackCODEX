@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>HabitFire – Prototype</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Screen 1: Login -->
+  <section id="loginScreen" class="screen" aria-labelledby="loginTitle">
+    <div class="card" role="dialog" aria-modal="true" aria-labelledby="loginTitle">
+      <h1 id="loginTitle">Welcome to HabitFire</h1>
+      <p>Track daily habits quickly. No signup yet—just a username to start.</p>
+
+      <div class="field">
+        <label for="username">Choose a username (max 20 chars)</label>
+        <input id="username" type="text" maxlength="20" autocomplete="nickname" placeholder="e.g. SuperFocus" />
+      </div>
+
+      <div class="login-actions">
+        <button id="startBtn" class="btn" disabled>Continue</button>
+        <p style="font-size:12px;">By continuing you accept that this demo stores data locally in your browser.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screen 2: Main Menu -->
+  <section id="mainScreen" class="screen hidden" aria-live="polite">
+    <div class="main-wrap">
+      <div class="hello" id="hello"></div>
+
+      <button id="flameBtn" class="flame-btn" aria-haspopup="dialog" aria-controls="logModal">
+        <span class="flame" aria-hidden="true">🔥</span>
+        <span id="countBadge" class="count-badge" aria-hidden="true"></span>
+        <span class="sr-only">Log an activity</span>
+      </button>
+
+      <p class="muted">Tap the flame to log what you did today and for how long.</p>
+    </div>
+  </section>
+
+  <!-- Modal: Log Activity -->
+  <div id="overlay" class="overlay" aria-hidden="true"></div>
+  <div id="logModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-header">
+      <div class="modal-title" id="modalTitle">Log today's activity</div>
+      <button id="closeModal" class="icon-btn" aria-label="Close">✕</button>
+    </div>
+
+    <div class="modal-fields">
+      <div class="field">
+        <label for="activityInput">What did you do?</label>
+        <input id="activityInput" type="text" placeholder="e.g. Jogging, Reading, Meditation" />
+      </div>
+
+      <div class="field">
+        <label for="durationSelect">For how long?</label>
+        <select id="durationSelect">
+          <option value="" selected disabled>Select duration…</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="safe-area">
+      <button id="logBtn" class="btn" disabled>Log activity</button>
+    </div>
+  </div>
+
+  <script defer src="app.js"></script>
+</body>
+</html>
